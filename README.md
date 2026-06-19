@@ -1,77 +1,239 @@
-# PortfolioPro AI
+<div align="center">
 
-A modern, AI-powered portfolio builder built with React, TypeScript, and TanStack Start.
+# 🚀 PortfolioPro AI
 
-## Tech Stack
+### Build a stunning developer portfolio — powered by AI, in minutes.
 
-- **React 19** - UI library
-- **TanStack Start** - Full-stack React framework with SSR
-- **TanStack Router** - File-based routing
-- **TanStack Query** - Data fetching and caching
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **ShadCN UI** - Component library
+An AI-powered portfolio builder with a multi-screen app experience: landing page, portfolio builder, resume ATS optimizer, analytics dashboard, theme picker, and sign-up — all wired together with TanStack Router and React 19.
 
-## Getting Started
+[![React](https://img.shields.io/badge/React-19-149ECA?style=flat-square&logo=react&logoColor=white)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![TanStack Router](https://img.shields.io/badge/TanStack_Router-File_Based-FF4154?style=flat-square)](https://tanstack.com/router)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](#license)
+
+</div>
+
+---
+
+## 📖 Overview
+
+PortfolioPro AI is a full-featured portfolio builder SaaS interface built with React 19 and TanStack Router. It lets developers describe themselves and their work, then generates a polished, customizable portfolio — complete with a built-in resume ATS optimizer, visitor analytics, and a multi-theme picker.
+
+The app is structured as a **multi-screen shell**: a React root with file-based routing hosts each screen (Landing, Builder, Dashboard, Resume ATS, Analytics, Themes, Sign Up) inside a `ScreenFrame` component. A top navigation bar lets users switch between screens with a persistent dark/light theme toggle that syncs across all frames via `postMessage`.
+
+---
+
+## ✨ Features
+
+- 🧙 **AI Portfolio Builder** — guided workflow to generate a complete portfolio from your skills, experience, and projects
+- 📄 **Resume ATS Optimizer** — analyze and improve your resume for Applicant Tracking Systems
+- 📊 **Analytics Dashboard** — track portfolio visitors, views, and engagement with charts powered by Recharts
+- 🎨 **Theme Picker** — choose from multiple visual themes for your generated portfolio
+- 🌗 **Dark / Light Mode** — persistent theme toggle synced across all screens via `postMessage`
+- 🔐 **Sign Up flow** — onboarding screen with React Hook Form + Zod validation
+- 🗂️ **File-based routing** — TanStack Router with auto-generated route tree (`routeTree.gen.ts`)
+- ⚡ **Fast dev experience** — Vite 5, `vite-tsconfig-paths`, and strict TypeScript
+
+---
+
+## 🖥️ App Screens
+
+| Route | Screen | Description |
+|---|---|---|
+| `/` | Landing | Hero page — introduces PortfolioPro AI |
+| `/builder` | Builder | AI-powered portfolio creation wizard |
+| `/dashboard` | Dashboard | User dashboard with portfolio management |
+| `/resume` | Resume ATS | Resume analysis and ATS optimization |
+| `/analytics` | Analytics | Visitor stats and portfolio engagement metrics |
+| `/themes` | Themes | Browse and apply visual themes |
+| `/signup` | Sign Up | Account creation with form validation |
+
+---
+
+## 🧱 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | React 19, TypeScript 5.8 |
+| Build tool | Vite 5, `@vitejs/plugin-react`, `vite-tsconfig-paths` |
+| Routing | TanStack Router (file-based, auto-generated route tree) |
+| Data fetching | TanStack Query v5 |
+| UI components | shadcn/ui (New York style, Radix UI primitives) |
+| Icons | Lucide React |
+| Styling | TailwindCSS 3, `tailwindcss-animate`, `tw-animate-css` |
+| Forms | React Hook Form + Zod + `@hookform/resolvers` |
+| Charts | Recharts |
+| Animation | Framer Motion |
+| Linting | ESLint 9, `eslint-plugin-react-hooks`, Prettier |
+
+---
+
+## 📁 Project Structure
+
+```
+portfolio-ai/
+├── src/
+│   ├── routes/                  # File-based routes (TanStack Router)
+│   │   ├── __root.tsx           # App shell — QueryClient, error boundary, 404
+│   │   ├── index.tsx            # / → Landing screen
+│   │   ├── builder.tsx          # /builder → AI portfolio builder
+│   │   ├── dashboard.tsx        # /dashboard → User dashboard
+│   │   ├── resume.tsx           # /resume → Resume ATS optimizer
+│   │   ├── analytics.tsx        # /analytics → Visitor analytics
+│   │   └── signup.tsx           # /signup → Sign up flow
+│   ├── components/
+│   │   ├── ScreenFrame.tsx      # Navigation shell + iframe screen host + theme sync
+│   │   └── ui/                  # shadcn/ui components
+│   ├── hooks/                   # Custom React hooks
+│   ├── lib/
+│   │   └── api/                 # API utilities, error reporting, server config
+│   ├── server/                  # Server-side utilities
+│   ├── routeTree.gen.ts         # Auto-generated by TanStack Router (do not edit)
+│   └── styles.css               # Global styles + Tailwind base
+├── public/
+│   └── screens/                 # Static HTML screens loaded by ScreenFrame
+│       ├── landing.html
+│       ├── builder.html
+│       ├── dashboard.html
+│       ├── resume.html
+│       ├── analytics.html
+│       └── signup.html
+├── components.json              # shadcn/ui config (New York style, slate base)
+├── tailwind.config.js
+├── vite.config.ts
+├── tsconfig.json
+└── .env.example
+```
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 20+ or 22+
-- npm or bun
+- **Node.js** 20+ (or **Bun** — a `bun.lock` is included)
+- **npm** or **bun**
 
-### Installation
+### 1. Clone the repository
 
 ```bash
-npm install
+git clone https://github.com/leevanshi/portfolio-ai.git
+cd portfolio-ai
 ```
 
-### Development
+### 2. Install dependencies
+
+```bash
+# Using npm
+npm install
+
+# Or using bun
+bun install
+```
+
+### 3. Configure environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+Fill in your `.env.local`:
+
+```env
+NODE_ENV=development
+VITE_APP_NAME=PortfolioPro AI
+VITE_APP_URL=http://localhost:5173
+
+# Optional: analytics
+# VITE_GA_ID=your-google-analytics-id
+
+# Optional: backend / auth / database
+# VITE_API_URL=https://api.example.com
+# SUPABASE_URL=your-supabase-url
+# SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+### 4. Start the dev server
 
 ```bash
 npm run dev
+# or
+bun dev
 ```
 
-### Build
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```bash
-npm run build
-```
+---
 
-### Preview
+## 🛠️ Available Scripts
 
-```bash
-npm run preview
-```
+| Command | Description |
+|---|---|
+| `npm run dev` | Start Vite dev server on port 5173 |
+| `npm run build` | Production build |
+| `npm run build:dev` | Development build |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint across all source files |
+| `npm run format` | Format code with Prettier |
 
-## Project Structure
+---
 
-```
-src/
-├── components/       # React components
-│   └── ui/          # ShadCN UI components
-├── routes/          # File-based routes
-├── hooks/           # Custom React hooks
-├── lib/             # Utility functions and configurations
-│   └── api/         # API-related utilities
-├── server/          # Server-side code
-└── styles.css       # Global styles
-```
+## 🗺️ Routing
 
-## Routing
+PortfolioPro AI uses **TanStack Router with file-based routing**. Every `.tsx` file in `src/routes/` is automatically a route. The route tree is auto-generated into `routeTree.gen.ts` — do not edit it by hand.
 
-TanStack Start uses **file-based routing**. Every `.tsx` file in the `src/routes` directory is a route.
-
-| File | URL |
-| --- | --- |
+| File | Route |
+|---|---|
+| `__root.tsx` | App shell (layout, providers, error boundary) |
 | `index.tsx` | `/` |
-| `about.tsx` | `/about` |
-| `users/index.tsx` | `/users` |
-| `users/$id.tsx` | `/users/:id` (dynamic) |
-| `_layout.tsx` | layout route |
-| `__root.tsx` | app shell |
+| `builder.tsx` | `/builder` |
+| `dashboard.tsx` | `/dashboard` |
+| `resume.tsx` | `/resume` |
+| `analytics.tsx` | `/analytics` |
+| `signup.tsx` | `/signup` |
 
-`routeTree.gen.ts` is auto-generated. Don't edit it by hand.
+---
 
-## License
+## 🎨 Theme System
 
-MIT
+The app ships with a persistent **dark / light mode** toggle. The selected theme is:
+
+- Saved to `localStorage` under the key `pp-theme`
+- Applied as a class (`app-dark` / `app-light`) on the document root
+- Broadcast to each screen frame via `window.postMessage` so inner screens stay in sync
+
+The design uses a purple-pink-amber gradient palette (`#8b5cf6 → #ec4899 → #f59e0b`) with a deep violet dark background (`#0a0420`) and a soft pink-white light background (`#fff5fb`).
+
+---
+
+## 🔑 Environment Variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `VITE_APP_NAME` | No | App display name (default: `PortfolioPro AI`) |
+| `VITE_APP_URL` | No | Base URL of the app |
+| `VITE_GA_ID` | No | Google Analytics measurement ID |
+| `VITE_POSTHOG_KEY` | No | PostHog analytics key |
+| `VITE_API_URL` | No | Backend API base URL |
+| `SUPABASE_URL` | No | Supabase project URL (if using Supabase auth/db) |
+| `SUPABASE_ANON_KEY` | No | Supabase anonymous key |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Fork the repo, create a feature branch, and open a pull request.
+
+```bash
+git checkout -b feature/your-feature
+git commit -m "feat: describe your change"
+git push origin feature/your-feature
+```
+
+---
+
+## 📄 License
+
+Licensed under the [MIT License](./LICENSE).
